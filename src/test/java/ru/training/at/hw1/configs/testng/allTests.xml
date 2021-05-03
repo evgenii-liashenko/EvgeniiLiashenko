@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="all test suites combined">
+    <test verbose="2" preserve-order="true" name="checks from all suites">
+        <classes>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.AdditionTest">
+                <methods>
+                    <include name="testSum"/>
+                </methods>
+            </class>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.SubtractionTest">
+                <methods>
+                    <include name="testSub"/>
+                </methods>
+            </class>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.MultiplicationTest">
+                <methods>
+                    <include name="testMult"/>
+                </methods>
+            </class>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.DivisionTest">
+                <methods>
+                    <include name="testDiv"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
