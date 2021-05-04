@@ -1,16 +1,15 @@
 package ru.training.at.hw1.classes.operations.arithmetic;
 
-import com.epam.tat.module4.Calculator;
-import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
+import ru.training.at.hw1.classes.operations.OperationTest;
 
-public class DivisionTest {
+public class DivisionTest extends OperationTest {
     @Test(groups = {"arithmeticOperations", "multiplyDivide"},
             dataProvider = "operands", dataProviderClass = DataProvider.class)
     public void testDiv(int a, int b) {
-        Calculator testCalc = new Calculator();
         int expectedResult = a / b;
         long actualResult = testCalc.div((long) a, (long) b);
-        Assert.assertEquals(actualResult, (long) expectedResult);
+        assertEquals(actualResult, (long) expectedResult);
     }
 }
