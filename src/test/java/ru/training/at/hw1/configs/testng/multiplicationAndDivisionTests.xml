@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="multiplication and division test suite">
+    <groups>
+        <run>
+            <include name="multiplyDivide"/>
+        </run>
+    </groups>
+    <test name="positive checks for multiplication and division">
+        <classes>
+            <class name="ru.training.at.hw1.classes.operations.OperationTest"></class>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.MultiplicationTest"></class>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.DivisionTest"></class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="addition and subtraction test suite">
+    <groups>
+        <run>
+            <include name="plusMinus"/>
+        </run>
+    </groups>
+    <test name="checks for addition and subtraction">
+        <classes>
+            <class name="ru.training.at.hw1.classes.operations.OperationTest"></class>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.AdditionTest"></class>
+            <class name="ru.training.at.hw1.classes.operations.arithmetic.SubtractionTest"></class>
+        </classes>
+    </test>
+</suite>
