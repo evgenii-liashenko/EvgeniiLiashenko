@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="HW3 Test Suite">
+    <test name="Excercise 1">
+        <classes>
+            <class name="ru.training.at.hw3.tests.Exercise1HomePageTest"></class>
+        </classes>
+    </test>
+    <test name="Excercise 2">
+        <classes>
+            <class name="ru.training.at.hw3.tests.Exercise2DifferentElementsPageTest"></class>
+        </classes>
+    </test>
+</suite>
