@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import ru.training.at.hw2.BaseTest;
 
-import java.util.List;
+import java.util.*;
 
 
 public class Exercise1 extends BaseTest {
@@ -101,31 +101,29 @@ public class Exercise1 extends BaseTest {
         WebElement serviceButton = webDriver.findElement(By.cssSelector("ul.uui-navigation>li:nth-child(3).dropdown>a"));
         WebElement metalsAndColorsButton = webDriver.findElement(By.cssSelector("ul.uui-navigation>li:nth-child(4)>a[href='metals-colors.html']"));
 
-        // SoftAsserting the visibility of the elements
-        softAssertObject.assertTrue(homeButton.isDisplayed());
-        softAssertObject.assertTrue(contactFormButton.isDisplayed());
-        softAssertObject.assertTrue(serviceButton.isDisplayed());
-        softAssertObject.assertTrue(metalsAndColorsButton.isDisplayed());
+        //Expected texts
+        Map<String, WebElement> headerItems = new HashMap<>();
+        headerItems.put("HOME", homeButton);
+        headerItems.put("CONTACT FORM", contactFormButton);
+        headerItems.put("SERVICE", serviceButton);
+        headerItems.put("METALS & COLORS", metalsAndColorsButton);
 
-        // SoftAsserting button texts
-        softAssertObject.assertEquals(homeButton.getText(), "HOME");
-        softAssertObject.assertEquals(contactFormButton.getText(), "CONTACT FORM");
-        softAssertObject.assertEquals(serviceButton.getText(), "SERVICE");
-        softAssertObject.assertEquals(metalsAndColorsButton.getText(), "METALS & COLORS");
+        //SoftAsserting that the header items are displayed and contain correct text
+        for (Map.Entry<String, WebElement> item : headerItems.entrySet()) {
+            softAssertObject.assertTrue(item.getValue().isDisplayed());
+            softAssertObject.assertEquals(item.getKey(), item.getValue().getText());
+        }
     }
 
     public void checkIndexPageIcons() {
         //Locating elements with CSS selectors
-        WebElement microscopeIcon = webDriver.findElement(By.cssSelector("div.benefit-icon>span.icons-benefit.icon-practise"));
-        WebElement headsetIcon = webDriver.findElement(By.cssSelector("div.benefit-icon>span.icons-benefit.icon-custom"));
-        WebElement screenIcon = webDriver.findElement(By.cssSelector("div.benefit-icon>span.icons-benefit.icon-multi"));
-        WebElement rocketIcon = webDriver.findElement(By.cssSelector("div.benefit-icon>span.icons-benefit.icon-base"));
+        List<WebElement> greenIcons = webDriver.findElements(By.cssSelector("div.benefit-icon>span.icons-benefit"));
 
-        //SoftAsserting that the icons are displayed
-        softAssertObject.assertTrue(microscopeIcon.isDisplayed());
-        softAssertObject.assertTrue(headsetIcon.isDisplayed());
-        softAssertObject.assertTrue(screenIcon.isDisplayed());
-        softAssertObject.assertTrue(rocketIcon.isDisplayed());
+        //SoftAsserting that the 4 icons are displayed
+        for (WebElement icon : greenIcons) {
+            softAssertObject.assertTrue(icon.isDisplayed());
+        }
+        softAssertObject.assertTrue(greenIcons.size() == 4);
     }
 
     public void checkTextUnderIcons() {
@@ -134,24 +132,21 @@ public class Exercise1 extends BaseTest {
         String expectedTextHeadset = "To be flexible and\ncustomizable";
         String expectedTextScreen = "To be multiplatform";
         String expectedTextRocket = "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…";
+        List<String> expectedTexts = Arrays.asList(expectedTextMicroscope, expectedTextHeadset, expectedTextScreen, expectedTextRocket);
 
-        //Locating the elements with CSS selectors
-        WebElement microscopeText = webDriver.findElement(By.cssSelector("div.row.clerafix.benefits>div:nth-child(1).col-sm-3>div.benefit>span.benefit-txt"));
-        WebElement headsetText = webDriver.findElement(By.cssSelector("div.row.clerafix.benefits>div:nth-child(2).col-sm-3>div.benefit>span.benefit-txt"));
-        WebElement screenText = webDriver.findElement(By.cssSelector("div.row.clerafix.benefits>div:nth-child(3).col-sm-3>div.benefit>span.benefit-txt"));
-        WebElement rocketText = webDriver.findElement(By.cssSelector("div.row.clerafix.benefits>div:nth-child(4).col-sm-3>div.benefit>span.benefit-txt"));
+        //Locating the text elements with a CSS selector
+        List<WebElement> actualTexts = webDriver.findElements(By.cssSelector("div.row.clerafix.benefits>div.col-sm-3>div.benefit>span.benefit-txt"));
 
-        //SoftAsserting that the texts are displayed
-        softAssertObject.assertTrue(microscopeText.isDisplayed());
-        softAssertObject.assertTrue(headsetText.isDisplayed());
-        softAssertObject.assertTrue(screenText.isDisplayed());
-        softAssertObject.assertTrue(rocketText.isDisplayed());
+        //SoftAsserting that the 4 texts are displayed
+        softAssertObject.assertTrue(actualTexts.size() == 4);
+        for (WebElement text : actualTexts) {
+            softAssertObject.assertTrue(text.isDisplayed());
+        }
 
         //SoftAsserting that the displayed texts match the expected texts
-        softAssertObject.assertEquals(microscopeText.getText(), expectedTextMicroscope);
-        softAssertObject.assertEquals(headsetText.getText(), expectedTextHeadset);
-        softAssertObject.assertEquals(screenText.getText(), expectedTextScreen);
-        softAssertObject.assertEquals(rocketText.getText(), expectedTextRocket);
+        for (int i = 0; i < 4; i++) {
+            softAssertObject.assertEquals(actualTexts.get(i).getText(), expectedTexts.get(i));
+        }
     }
 
     public void checkTopIframePresence() {
@@ -186,19 +181,19 @@ public class Exercise1 extends BaseTest {
         WebElement metalsAndColorsSection = webDriver.findElement(By.cssSelector("#mCSB_1_container>ul.sidebar-menu.left>li[index='4']"));
         WebElement elementsPacksSection = webDriver.findElement(By.cssSelector("#mCSB_1_container>ul.sidebar-menu.left>li[index='5']"));
 
-        //SoftAsserting that the sidebar items are displayed
-        softAssertObject.assertTrue(homeSection.isDisplayed());
-        softAssertObject.assertTrue(contactFormSection.isDisplayed());
-        softAssertObject.assertTrue(serviceSection.isDisplayed());
-        softAssertObject.assertTrue(metalsAndColorsSection.isDisplayed());
-        softAssertObject.assertTrue(elementsPacksSection.isDisplayed());
+        //Expected text
+        Map<String, WebElement> sidebarItems = new HashMap<>();
+        sidebarItems.put("Home", homeSection);
+        sidebarItems.put("Contact form", contactFormSection);
+        sidebarItems.put("Service", serviceSection);
+        sidebarItems.put("Metals & Colors", metalsAndColorsSection);
+        sidebarItems.put("Elements packs", elementsPacksSection);
 
-        //SoftAsserting that the sidebar items contain correct text
-        softAssertObject.assertEquals(homeSection.getText(), "Home");
-        softAssertObject.assertEquals(contactFormSection.getText(), "Contact form");
-        softAssertObject.assertEquals(serviceSection.getText(), "Service");
-        softAssertObject.assertEquals(metalsAndColorsSection.getText(), "Metals & Colors");
-        softAssertObject.assertEquals(elementsPacksSection.getText(), "Elements packs");
+        //SoftAsserting that the sidebar items are displayed and contain correct text
+        for (Map.Entry<String, WebElement> item : sidebarItems.entrySet()) {
+            softAssertObject.assertTrue(item.getValue().isDisplayed());
+            softAssertObject.assertEquals(item.getKey(), item.getValue().getText());
+        }
     }
 
 }

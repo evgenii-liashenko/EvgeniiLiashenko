@@ -19,7 +19,7 @@ public class BaseTest {
         if (webDriver == null) {
             WebDriverManager.chromedriver().setup();
             webDriver = new ChromeDriver();
-//            webDriver.manage().window().maximize();
+            webDriver.manage().window().maximize();
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             webDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             webDriver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
@@ -44,8 +44,7 @@ public class BaseTest {
     @AfterClass
     public void shutDownWebDriver() {
         if (webDriver != null) {
-            webDriver.close();
-//            webDriver.quit();
+            webDriver.quit();
         }
     }
 
