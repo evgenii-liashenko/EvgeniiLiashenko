@@ -1,19 +1,26 @@
 package ru.training.at.hw3.tests;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.training.at.hw3.webpages.HomePage;
 
-public class Exercise1HomePageTest extends BaseTest{
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Exercise1HomePageTest extends BaseTest {
 
     HomePage homePage;
+
     @BeforeClass
-    public void createHomePageObject(){
+    public void createHomePageObject() {
         homePage = new HomePage(webDriver);
     }
 
     @Test(dataProvider = "credentials", dataProviderClass = UserData.class)
-    public void executeTestSteps(String userName, String password){
+    public void executeTestSteps(String userName, String password) {
         //1. Open test site by URL
         openTestSiteUrl();
 
@@ -75,24 +82,23 @@ public class Exercise1HomePageTest extends BaseTest{
     }
 
     public void checkHeaderItems() {
-        // SoftAsserting the visibility of the elements
-        softAssert.assertTrue(homePage.menuBar.home.isDisplayed());
-        softAssert.assertTrue(homePage.menuBar.contactForm.isDisplayed());
-        softAssert.assertTrue(homePage.menuBar.service.isDisplayed());
-        softAssert.assertTrue(homePage.menuBar.metalsAndColors.isDisplayed());
-        // SoftAsserting button texts
-        softAssert.assertEquals(homePage.menuBar.home.getText(),"HOME");
-        softAssert.assertEquals(homePage.menuBar.contactForm.getText(),"CONTACT FORM");
-        softAssert.assertEquals(homePage.menuBar.service.getText(),"SERVICE");
-        softAssert.assertEquals(homePage.menuBar.metalsAndColors.getText(),"METALS & COLORS");
+        //Expected texts
+        Map<String, WebElement> headerItems = new HashMap<>();
+        headerItems.put("HOME", homePage.menuBar.home);
+        headerItems.put("CONTACT FORM", homePage.menuBar.contactForm);
+        headerItems.put("SERVICE", homePage.menuBar.service);
+        headerItems.put("METALS & COLORS", homePage.menuBar.metalsAndColors);
+
+        //SoftAsserting that the elements are visible and contain correct texts
+        checkTextAndVisibility(headerItems);
     }
 
     public void checkIndexPageIcons() {
         //SoftAsserting that the icons are displayed
-        softAssert.assertTrue(homePage.microscopeIcon.isDisplayed());
-        softAssert.assertTrue(homePage.headsetIcon.isDisplayed());
-        softAssert.assertTrue(homePage.screenIcon.isDisplayed());
-        softAssert.assertTrue(homePage.rocketIcon.isDisplayed());
+        List<WebElement> greenIcons = Arrays.asList(homePage.microscopeIcon, homePage.headsetIcon, homePage.screenIcon, homePage.rocketIcon);
+        for (WebElement icon : greenIcons) {
+            softAssert.assertTrue(icon.isDisplayed());
+        }
     }
 
     public void checkTextUnderIcons() {
@@ -101,18 +107,14 @@ public class Exercise1HomePageTest extends BaseTest{
         String expectedHeadsetText = "To be flexible and\ncustomizable";
         String expectedScreenText = "To be multiplatform";
         String expectedRocketText = "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…";
+        Map<String, WebElement> iconTexts = new HashMap<>();
+        iconTexts.put(expectedMicroscopeText, homePage.microscopeText);
+        iconTexts.put(expectedHeadsetText, homePage.headsetText);
+        iconTexts.put(expectedScreenText, homePage.screenText);
+        iconTexts.put(expectedRocketText, homePage.rocketText);
 
-        //SoftAsserting that the texts are displayed
-        softAssert.assertTrue(homePage.microscopeText.isDisplayed());
-        softAssert.assertTrue(homePage.headsetText.isDisplayed());
-        softAssert.assertTrue(homePage.screenText.isDisplayed());
-        softAssert.assertTrue(homePage.rocketText.isDisplayed());
-
-        //SoftAsserting that the displayed texts match the expected texts
-        softAssert.assertEquals(homePage.microscopeText.getText(), expectedMicroscopeText);
-        softAssert.assertEquals(homePage.headsetText.getText(), expectedHeadsetText);
-        softAssert.assertEquals(homePage.screenText.getText(), expectedScreenText);
-        softAssert.assertEquals(homePage.rocketText.getText(), expectedRocketText);
+        //SoftAsserting that the elements are visible and contain correct texts
+        checkTextAndVisibility(iconTexts);
     }
 
     public void checkTopIframePresence() {
@@ -133,18 +135,16 @@ public class Exercise1HomePageTest extends BaseTest{
     }
 
     public void checkSidebarItems() {
-        //SoftAsserting that the sidebar items are displayed
-        softAssert.assertTrue(homePage.sideBar.homeSection.isDisplayed());
-        softAssert.assertTrue(homePage.sideBar.contactFormSection.isDisplayed());
-        softAssert.assertTrue(homePage.sideBar.serviceSection.isDisplayed());
-        softAssert.assertTrue(homePage.sideBar.metalsAndColorsSection.isDisplayed());
-        softAssert.assertTrue(homePage.sideBar.elementsPacksSection.isDisplayed());
+        //Expected texts
+        HashMap<String, WebElement> sidebarItems = new HashMap<>();
+        sidebarItems.put("Home", homePage.sideBar.homeSection);
+        sidebarItems.put("Contact form", homePage.sideBar.contactFormSection);
+        sidebarItems.put("Service", homePage.sideBar.serviceSection);
+        sidebarItems.put("Metals & Colors", homePage.sideBar.metalsAndColorsSection);
+        sidebarItems.put("Elements packs", homePage.sideBar.elementsPacksSection);
 
-        //SoftAsserting that the sidebar items contain correct text
-        softAssert.assertEquals(homePage.sideBar.homeSection.getText(),"Home");
-        softAssert.assertEquals(homePage.sideBar.contactFormSection.getText(), "Contact form");
-        softAssert.assertEquals(homePage.sideBar.serviceSection.getText(),"Service");
-        softAssert.assertEquals(homePage.sideBar.metalsAndColorsSection.getText(),"Metals & Colors");
-        softAssert.assertEquals(homePage.sideBar.elementsPacksSection.getText(),"Elements packs");
+        //SoftAsserting that the elements are visible and contain correct texts
+        checkTextAndVisibility(sidebarItems);
     }
+
 }

@@ -19,7 +19,6 @@ public class DriverConfigurator {
         return webDriverDc;
     }
     public void resetDriver(){
-        webDriverDc.close();
         webDriverDc.quit();
         webDriverDc = null;
     }
