@@ -14,6 +14,9 @@
 
         <testng.configs.path>${basedir}/src/test/java/ru/training/at/hw1/configs/testng</testng.configs.path>
         <testng.suite.file/>
+
+        <testng.configs.path.hw2>${basedir}/src/test/java/ru/training/at/hw2/configs/testng</testng.configs.path.hw2>
+        <testng.suite.file/>
     </properties>
 
     <dependencies>
@@ -30,6 +33,19 @@
             <version>1.0</version>
             <systemPath>${basedir}/src/main/resources/calculator-1.0.jar</systemPath>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.4.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -54,7 +70,6 @@
                 <testng.suite.file>${testng.configs.path}/allTests.xml</testng.suite.file>
             </properties>
         </profile>
-
         <profile>
             <id>additionAndSubtractionTests</id>
             <activation>
@@ -64,13 +79,22 @@
                 <testng.suite.file>${testng.configs.path}/additionAndSubtractionTests.xml</testng.suite.file>
             </properties>
         </profile>
-
         <profile>
             <id>multiplicationAndDivisionTests</id>
             <properties>
                 <testng.suite.file>${testng.configs.path}/multiplicationAndDivisionTests.xml</testng.suite.file>
             </properties>
         </profile>
+
+
+        <profile>
+            <id>homework2</id>
+            <properties>
+                <testng.suite.file>${testng.configs.path.hw2}/hw2Tests.xml</testng.suite.file>
+            </properties>
+
+        </profile>
+
     </profiles>
 
 </project>
