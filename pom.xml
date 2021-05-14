@@ -14,10 +14,11 @@
 
         <testng.configs.path>${basedir}/src/test/java/ru/training/at/hw1/configs/testng</testng.configs.path>
         <testng.suite.file/>
-
+      
         <testng.configs.path.hw2>${basedir}/src/test/java/ru/training/at/hw2/configs/testng</testng.configs.path.hw2>
+        <testng.configs.path.hw3>${basedir}/src/test/java/ru/training/at/hw3/configs/testng</testng.configs.path.hw3>
         <testng.suite.file/>
-    </properties>
+  </properties>
 
     <dependencies>
         <dependency>
@@ -33,7 +34,6 @@
             <version>1.0</version>
             <systemPath>${basedir}/src/main/resources/calculator-1.0.jar</systemPath>
         </dependency>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -44,8 +44,6 @@
             <artifactId>webdrivermanager</artifactId>
             <version>4.4.1</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -85,16 +83,18 @@
                 <testng.suite.file>${testng.configs.path}/multiplicationAndDivisionTests.xml</testng.suite.file>
             </properties>
         </profile>
-
-
         <profile>
             <id>homework2</id>
             <properties>
                 <testng.suite.file>${testng.configs.path.hw2}/hw2Tests.xml</testng.suite.file>
             </properties>
-
         </profile>
-
+        <profile>
+            <id>homework3</id>
+            <properties>
+                <testng.suite.file>${testng.configs.path.hw3}/homework3.xml</testng.suite.file>
+            </properties>
+        </profile>        
     </profiles>
 
 </project>
