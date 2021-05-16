@@ -1,4 +1,8 @@
-/target/
+/"
+/.allure/
 /.idea/
+/allure-results/
+/screenshots/
+/target/
 homework.iml
 **/.DS_Store
