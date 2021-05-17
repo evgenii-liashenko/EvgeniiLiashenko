@@ -31,7 +31,7 @@ public class DifferentElementsPage extends BasePage {
     public WebElement yellowSelectorOption;
 
 
-
+    @Override
     public void openPage(){
         menuBar.service.click();
         menuBar.differentElements.click();

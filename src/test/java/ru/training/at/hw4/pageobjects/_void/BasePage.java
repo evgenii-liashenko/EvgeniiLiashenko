@@ -7,7 +7,7 @@ import ru.training.at.hw4.pageobjects._void.components.SideBar;
 import ru.training.at.hw4.pageobjects._void.components.UserAccountMenu;
 
 
-public abstract class BasePage {
+public class BasePage {
     public MenuBar menuBar;
     public UserAccountMenu userAccountMenu;
     public SideBar sideBar;
@@ -23,7 +23,10 @@ public abstract class BasePage {
     }
 
 
-    abstract void openPage();
+    public void openPage(){
+        //Opening the Home Page URL
+        webDriver.get("https://jdi-testing.github.io/jdi-light/index.html");
+    }
 
     public String getTabTitle(){
         return webDriver.getTitle();

@@ -59,19 +59,5 @@ public class BaseTest {
         }
     }
 
-//    public void takeScreenshot()
-//    {
-//        Date dateObject = Calendar.getInstance().getTime();
-//        String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(dateObject);
-//        String currentTime = new SimpleDateFormat("HH.mm.ss").format(dateObject);
-//        String filePath = "screenshots/Screenshot " + currentDate + " at " + currentTime + ".png";
-//
-//        File image = ((TakesScreenshot)webDriver).getScreenshotAs(OutputType.FILE);
-//        try {
-//            FileUtils.copyFile(image, new File(filePath));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }

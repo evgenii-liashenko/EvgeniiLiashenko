@@ -49,6 +49,7 @@ public class HomePage extends BasePage {
         webDriver.switchTo().defaultContent();
     }
 
+    @Override
     public void openPage(){
         webDriver.get(url);
     }
