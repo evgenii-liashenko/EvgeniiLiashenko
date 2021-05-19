@@ -4,11 +4,14 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.training.at.hw4.listeners.ScreenshotListener;
 import ru.training.at.hw4.tests.steps.CommonTestSteps;
 import ru.training.at.hw4.tests.steps.HomePageTestSteps;
 
 
+@Listeners(ScreenshotListener.class)
 @Feature("Home Page (feature) [purposely failed]")
 @Story("Home Page functionality testing (story) [purposely failed]")
 public class FailedHomePageTest extends BaseTest {
@@ -24,6 +27,8 @@ public class FailedHomePageTest extends BaseTest {
 
     @Test(dataProvider = "credentials", dataProviderClass = UserData.class)
     public void executeTestSteps(String userName, String password) {
+
+
         //1. Open test site by URL
         commonTestSteps.openUrl();
 

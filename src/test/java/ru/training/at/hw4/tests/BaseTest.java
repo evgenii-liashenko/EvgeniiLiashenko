@@ -3,6 +3,7 @@ package ru.training.at.hw4.tests;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.asserts.SoftAssert;
@@ -19,10 +20,11 @@ public class BaseTest {
 
     @BeforeClass
     @Step("Loading webdriver")
-    public void loadWebDriver() {
+    public void loadWebDriver(ITestContext context) {
         if (webDriver == null) {
             webDriver = driverConfigurator.setUpDriver();
         }
+        context.setAttribute("webDriverInstance", webDriver);
     }
 
     @AfterClass

@@ -4,11 +4,14 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ru.training.at.hw4.listeners.ScreenshotListener;
 import ru.training.at.hw4.tests.steps.CommonTestSteps;
 import ru.training.at.hw4.tests.steps.DifferentElementsPageTestSteps;
 
 
+@Listeners(ScreenshotListener.class)
 @Feature("Different Elements page (feature)")
 @Story("Different Elements page functionality testing (story)")
 public class Exercise2DifferentElementsPageTest extends BaseTest {
