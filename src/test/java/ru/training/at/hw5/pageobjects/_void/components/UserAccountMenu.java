@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import ru.training.at.hw5.UserData;
+import ru.training.at.hw5.UserDataLoader;
 
 import java.util.Properties;
 
@@ -36,7 +36,7 @@ public class UserAccountMenu {
         enterButton.click();
     }
     public void authorizeUser(){
-        Properties credentials = UserData.getCredentials();
+        Properties credentials = UserDataLoader.getCredentials();
         userIcon.click();
         loginField.sendKeys(credentials.getProperty("username"));
         passwordField.sendKeys(credentials.getProperty("password"));
