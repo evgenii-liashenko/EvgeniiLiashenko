@@ -12,21 +12,28 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
+        <!-- Paths to TestNG config files-->
         <testng.configs.path>${basedir}/src/test/java/ru/training/at/hw1/configs/testng</testng.configs.path>
         <testng.suite.file/>
-      
         <testng.configs.path.hw2>${basedir}/src/test/java/ru/training/at/hw2/configs/testng</testng.configs.path.hw2>
+        <testng.suite.file/>
         <testng.configs.path.hw3>${basedir}/src/test/java/ru/training/at/hw3/configs/testng</testng.configs.path.hw3>
         <testng.suite.file/>
-  </properties>
+        <testng.configs.path.hw4>${basedir}/src/test/java/ru/training/at/hw4/configs/testng</testng.configs.path.hw4>
+        <testng.suite.file/>
+        <testng.configs.path.hw5>${basedir}/src/test/java/ru/training/at/hw5/configs/testng</testng.configs.path.hw5>
+        <testng.suite.file/>
+
+        <!-- Versions-->
+        <testng.version>7.4.0</testng.version>
+        <selenium-java.version>3.141.59</selenium-java.version>
+        <webdrivermanager.version>4.4.1</webdrivermanager.version>
+        <allure-testng.version>2.13.2</allure-testng.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <cucumbers.version>6.10.4</cucumbers.version>
+    </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.4.0</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>com.epam.tat.module4</groupId>
             <artifactId>calculator</artifactId>
@@ -35,15 +42,40 @@
             <systemPath>${basedir}/src/main/resources/calculator-1.0.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium-java.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>4.4.1</version>
+            <version>${webdrivermanager.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumbers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumbers.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -56,20 +88,30 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
 
     <profiles>
         <profile>
-            <id>allTests</id>
+            <id>hw1AllTests</id>
             <properties>
                 <testng.suite.file>${testng.configs.path}/allTests.xml</testng.suite.file>
             </properties>
         </profile>
         <profile>
-            <id>additionAndSubtractionTests</id>
+            <id>hw1AdditionAndSubtractionTests</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -78,7 +120,7 @@
             </properties>
         </profile>
         <profile>
-            <id>multiplicationAndDivisionTests</id>
+            <id>hw1MultiplicationAndDivisionTests</id>
             <properties>
                 <testng.suite.file>${testng.configs.path}/multiplicationAndDivisionTests.xml</testng.suite.file>
             </properties>
@@ -94,7 +136,34 @@
             <properties>
                 <testng.suite.file>${testng.configs.path.hw3}/homework3.xml</testng.suite.file>
             </properties>
-        </profile>        
+        </profile>
+        <profile>
+            <id>homework4</id>
+            <properties>
+                <testng.suite.file>${testng.configs.path.hw4}/homework4.xml</testng.suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>homework5</id>
+            <properties>
+                <testng.suite.file>${testng.configs.path.hw5}/homework5.xml</testng.suite.file>
+            </properties>
+        </profile>
     </profiles>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+                <configuration>
+                    <reportVersion>${allure-testng.version}</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

@@ -1,4 +1,9 @@
-/target/
+/"
+/.allure/
 /.idea/
+/allure-results/
+/screenshots/
+/target/
+evgenii-liashenko.iml
 homework.iml
 **/.DS_Store
