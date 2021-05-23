@@ -21,6 +21,8 @@
         <testng.suite.file/>
         <testng.configs.path.hw4>${basedir}/src/test/java/ru/training/at/hw4/configs/testng</testng.configs.path.hw4>
         <testng.suite.file/>
+        <testng.configs.path.hw5>${basedir}/src/test/java/ru/training/at/hw5/configs/testng</testng.configs.path.hw5>
+        <testng.suite.file/>
 
         <!-- Versions-->
         <testng.version>7.4.0</testng.version>
@@ -28,6 +30,7 @@
         <webdrivermanager.version>4.4.1</webdrivermanager.version>
         <allure-testng.version>2.13.2</allure-testng.version>
         <aspectj.version>1.8.10</aspectj.version>
+        <cucumbers.version>6.10.4</cucumbers.version>
     </properties>
 
     <dependencies>
@@ -60,6 +63,17 @@
             <version>${allure-testng.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumbers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumbers.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -75,13 +89,11 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-
-<!--                    <systemPropertyVariables>-->
-<!--                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>-->
-<!--                        <allure.link.issue.pattern>https://example.org/browse/{}</allure.link.issue.pattern>-->
-<!--                        <allure.link.tms.pattern>https://example.org/browse/{}</allure.link.tms.pattern>-->
-<!--                    </systemPropertyVariables>-->
-
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <allure.link.issue.pattern>https://example.org/browse/{}</allure.link.issue.pattern>
+                        <allure.link.tms.pattern>https://example.org/browse/{}</allure.link.tms.pattern>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -132,6 +144,12 @@
             <id>homework4</id>
             <properties>
                 <testng.suite.file>${testng.configs.path.hw4}/homework4.xml</testng.suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>homework5</id>
+            <properties>
+                <testng.suite.file>${testng.configs.path.hw5}/homework5.xml</testng.suite.file>
             </properties>
         </profile>
     </profiles>

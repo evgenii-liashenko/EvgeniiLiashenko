@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="HW5 Test Suite">
+    <test name="Cucumber">
+        <classes>
+            <class name="ru.training.at.hw5.CucumberTestLauncher"/>
+        </classes>
+    </test>
+</suite>
+
