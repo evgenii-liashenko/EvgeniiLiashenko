@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="HW4 Test Suite">
+    <listeners>
+        <listener class-name="ru.training.at.hw4.listeners.ScreenshotListener"></listener>
+    </listeners>
+    <test name="Exercise 1 from HW3">
+        <classes>
+            <class name="ru.training.at.hw4.tests.Exercise1HomePageTest"></class>
+        </classes>
+    </test>
+    <test name="Exercise 2 from HW3">
+        <classes>
+            <class name="ru.training.at.hw4.tests.Exercise2DifferentElementsPageTest"></class>
+        </classes>
+    </test>
+    <test name="Exercise 2 from HW4">
+        <classes>
+            <class name="ru.training.at.hw4.tests.FailedHomePageTest"></class>
+        </classes>
+    </test>
+</suite>
