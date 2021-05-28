@@ -16,7 +16,7 @@ public class User {
         Properties credentials = TestDataLoader.getCredentials();
         this.name = credentials.getProperty("username");
         this.password = credentials.getProperty("password");
-        this.fullName = "Roman Iovlev";
+        this.fullName = credentials.getProperty("fullname");
     }
     public User(String name, String password, String fullName) {
         System.out.println("Creating User object with full arg constructor");

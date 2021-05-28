@@ -23,7 +23,7 @@
         <testng.suite.file/>
         <testng.configs.path.hw5>${basedir}/src/test/java/ru/training/at/hw5/configs/testng</testng.configs.path.hw5>
         <testng.suite.file/>
-        <testng.configs.path.hw7>${basedir}/src/test/java/ru/training/at/hw7/configs/testng</testng.configs.path.hw7>
+        <testng.configs.path.hw7>${basedir}/src/test/resources/testng.configs</testng.configs.path.hw7>
         <testng.suite.file/>
 
         <!-- Versions-->

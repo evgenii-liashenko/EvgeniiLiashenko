@@ -11,7 +11,7 @@ import java.util.*;
 public class TestDataLoader {
     //Paths to .json and .properties files
     private String jsonFilePath = "src/test/resources/JDI_ex8_metalsColorsDataSet.json";
-    private static final String credentialsFilePath = "src/test/resources/credentials.properties";
+    private static final String credentialsFilePath = "src/test/resources/userdata.properties";
 
     //All data sets with test values from the json file
     private Map<String, TestDataSet> allTestData = extractDataFromJson(jsonFilePath);
@@ -34,7 +34,7 @@ public class TestDataLoader {
 
     //DataProvider method
     @DataProvider(name = "metalsAndColorsPageTestData")
-    public static Object[][] dpMethod() {
+    public static Object[][] jsonTestDataProvider() {
         //Gathering test data
         TestDataLoader testDataLoader = new TestDataLoader();
         Map<String, TestDataSet> testDataMap = testDataLoader.getAllTestData();
