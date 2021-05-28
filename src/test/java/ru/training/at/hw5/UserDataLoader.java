@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class UserDataLoader {
 
-    private static final String filePath = "src/test/resources/credentials.properties";
+    private static final String filePath = "src/test/resources/userdata.properties";
 
     public static Properties getCredentials(){
         FileInputStream fileInputStream;

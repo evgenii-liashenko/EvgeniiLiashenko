@@ -23,6 +23,8 @@
         <testng.suite.file/>
         <testng.configs.path.hw5>${basedir}/src/test/java/ru/training/at/hw5/configs/testng</testng.configs.path.hw5>
         <testng.suite.file/>
+        <testng.configs.path.hw7>${basedir}/src/test/resources/testng.configs</testng.configs.path.hw7>
+        <testng.suite.file/>
 
         <!-- Versions-->
         <testng.version>7.4.0</testng.version>
@@ -73,6 +75,16 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumbers.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
         </dependency>
     </dependencies>
 
@@ -150,6 +162,12 @@
             <id>homework5</id>
             <properties>
                 <testng.suite.file>${testng.configs.path.hw5}/homework5.xml</testng.suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>homework7</id>
+            <properties>
+                <testng.suite.file>${testng.configs.path.hw7}/homework7.xml</testng.suite.file>
             </properties>
         </profile>
     </profiles>
