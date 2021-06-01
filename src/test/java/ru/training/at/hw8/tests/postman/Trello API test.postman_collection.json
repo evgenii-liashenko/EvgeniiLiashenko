@@ -1,0 +1,502 @@
+{
+	"info": {
+		"_postman_id": "51a79d82-c426-49a4-b68c-b45d96b54c7b",
+		"name": "Trello API test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new board. Save the id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Writing the generated id into an environment variable",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"generatedBoardId\", jsonData.id);",
+							"",
+							"",
+							"//Tests",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains correct name for the board\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"newBoardName\"));",
+							"});",
+							"",
+							"pm.test(\"Response contains correct description for the board\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.desc).to.eql(pm.environment.get(\"boardDescription1\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var generatedName = \"Postman board\" + pm.variables.replaceIn('{{$timestamp}}');",
+							"pm.environment.set(\"newBoardName\", generatedName);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "21c2955e4d4e57644f942e14baf48a419df4cb51e89dc3ffa47069754663bfa1",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "e62ef7fb2451d55201879be72fa36c78",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/?name={{newBoardName}}&desc={{boardDescription1}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{newBoardName}}"
+						},
+						{
+							"key": "desc",
+							"value": "{{boardDescription1}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify name, description and close the board",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var generatedName = \"Modified Postman board \" + pm.variables.replaceIn('{{$randomCatchPhrase}}');",
+							"pm.environment.set(\"modifiedBoardName\", generatedName);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains updated name of the board\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"modifiedBoardName\"));",
+							"});",
+							"pm.test(\"Response contains updated description of board\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.desc).to.eql(pm.environment.get(\"boardDescription2\"));",
+							"});",
+							"pm.test(\"Response contains updated value of closed\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.closed).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{generatedBoardId}}?oauth_consumer_key=e62ef7fb2451d55201879be72fa36c78&oauth_nonce=xuXqFp6cZVt&oauth_signature=kdGYdG1zaR7BuHgyCgSLB455HwY=&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1622550675&oauth_token=c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720&oauth_version=1.0&oauth_consumer_key=e62ef7fb2451d55201879be72fa36c78&oauth_nonce=ziLQkMnFzL0&oauth_signature=V4uAH9abbM5Zb+sKIos/DG4t0aA=&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1622549066&oauth_token=c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720&oauth_version=1.0&desc={{boardDescription2}}&closed=true&name={{modifiedBoardName}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{generatedBoardId}}"
+					],
+					"query": [
+						{
+							"key": "oauth_consumer_key",
+							"value": "e62ef7fb2451d55201879be72fa36c78"
+						},
+						{
+							"key": "oauth_nonce",
+							"value": "xuXqFp6cZVt"
+						},
+						{
+							"key": "oauth_signature",
+							"value": "kdGYdG1zaR7BuHgyCgSLB455HwY="
+						},
+						{
+							"key": "oauth_signature_method",
+							"value": "HMAC-SHA1"
+						},
+						{
+							"key": "oauth_timestamp",
+							"value": "1622550675"
+						},
+						{
+							"key": "oauth_token",
+							"value": "c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720"
+						},
+						{
+							"key": "oauth_version",
+							"value": "1.0"
+						},
+						{
+							"key": "oauth_consumer_key",
+							"value": "e62ef7fb2451d55201879be72fa36c78"
+						},
+						{
+							"key": "oauth_nonce",
+							"value": "ziLQkMnFzL0"
+						},
+						{
+							"key": "oauth_signature",
+							"value": "V4uAH9abbM5Zb+sKIos/DG4t0aA="
+						},
+						{
+							"key": "oauth_signature_method",
+							"value": "HMAC-SHA1"
+						},
+						{
+							"key": "oauth_timestamp",
+							"value": "1622549066"
+						},
+						{
+							"key": "oauth_token",
+							"value": "c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720"
+						},
+						{
+							"key": "oauth_version",
+							"value": "1.0"
+						},
+						{
+							"key": "desc",
+							"value": "{{boardDescription2}}"
+						},
+						{
+							"key": "closed",
+							"value": "true"
+						},
+						{
+							"key": "name",
+							"value": "{{modifiedBoardName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify the changes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains updated name of the board\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"modifiedBoardName\"));",
+							"});",
+							"pm.test(\"Response contains updated description of board\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.desc).to.eql(pm.environment.get(\"boardDescription2\"));",
+							"});",
+							"pm.test(\"Response contains updated value of closed\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.closed).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth1",
+					"oauth1": [
+						{
+							"key": "tokenSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "consumerSecret",
+							"value": "21c2955e4d4e57644f942e14baf48a419df4cb51e89dc3ffa47069754663bfa1",
+							"type": "string"
+						},
+						{
+							"key": "token",
+							"value": "c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720",
+							"type": "string"
+						},
+						{
+							"key": "consumerKey",
+							"value": "e62ef7fb2451d55201879be72fa36c78",
+							"type": "string"
+						},
+						{
+							"key": "signatureMethod",
+							"value": "HMAC-SHA1",
+							"type": "string"
+						},
+						{
+							"key": "version",
+							"value": "1.0",
+							"type": "string"
+						},
+						{
+							"key": "addParamsToHeader",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "addEmptyParamsToSign",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{generatedBoardId}}?oauth_consumer_key=e62ef7fb2451d55201879be72fa36c78&oauth_nonce=5wEkDOTvogd&oauth_signature=dlJJ6Z17bvdsfX39CbamAKSA1H0=&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1622542868&oauth_token=c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720&oauth_version=1.0",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{generatedBoardId}}"
+					],
+					"query": [
+						{
+							"key": "oauth_consumer_key",
+							"value": "e62ef7fb2451d55201879be72fa36c78"
+						},
+						{
+							"key": "oauth_nonce",
+							"value": "5wEkDOTvogd"
+						},
+						{
+							"key": "oauth_signature",
+							"value": "dlJJ6Z17bvdsfX39CbamAKSA1H0="
+						},
+						{
+							"key": "oauth_signature_method",
+							"value": "HMAC-SHA1"
+						},
+						{
+							"key": "oauth_timestamp",
+							"value": "1622542868"
+						},
+						{
+							"key": "oauth_token",
+							"value": "c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720"
+						},
+						{
+							"key": "oauth_version",
+							"value": "1.0"
+						},
+						{
+							"key": "fields",
+							"value": "name,url,closed",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Response contains _value set to null\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._value).to.eql(null);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{generatedBoardId}}?",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{generatedBoardId}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth1",
+		"oauth1": [
+			{
+				"key": "tokenSecret",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "token",
+				"value": "c8cdc6eb1ccb4c164bafcbc8a3414856f30f99b9d9becf4ec386d5c5b89e4720",
+				"type": "string"
+			},
+			{
+				"key": "consumerSecret",
+				"value": "21c2955e4d4e57644f942e14baf48a419df4cb51e89dc3ffa47069754663bfa1",
+				"type": "string"
+			},
+			{
+				"key": "consumerKey",
+				"value": "e62ef7fb2451d55201879be72fa36c78",
+				"type": "string"
+			},
+			{
+				"key": "signatureMethod",
+				"value": "HMAC-SHA1",
+				"type": "string"
+			},
+			{
+				"key": "version",
+				"value": "1.0",
+				"type": "string"
+			},
+			{
+				"key": "addParamsToHeader",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "addEmptyParamsToSign",
+				"value": false,
+				"type": "boolean"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "newBoardName",
+			"value": ""
+		}
+	]
+}
